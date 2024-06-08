@@ -382,18 +382,23 @@ function sendMessage(userMessage){
 async function chatbotResponse(userMessage){
     var chatbotMessage="";
 
-    var result=arrayOfpossibleMessage.filter(val=>val.message.includes(userMessage.toLowerCase()));
+    var result = arrayOfpossibleMessage.filter(val => val.message.toLowerCase() === userMessage.toLowerCase());
+
     if(result.length>0){
         var response=result[0].response;
         chatbotMessage=response;
+        var messageElement=document.createElement('div');
+        messageElement.innerHTML="<span>ChatBot:</span>"+
+        "<span>Kannada word for "+userMessage+" is "+chatbotMessage+"</span>";
     }  
     else
     {
         chatbotMessage="Sorry,we Couldn't find your word...Type another word"
-    }  
         var messageElement=document.createElement('div');
         messageElement.innerHTML="<span>ChatBot:</span>"+
-        "<span>Kannada word for "+userMessage+" is "+chatbotMessage+"</span>";
+        "<span>"  +chatbotMessage+"</span>";
+    }  
+        
 
         setTimeout(()=>{
             messageElement.animate([{easing:"ease-in",opacity:0.4},{opacity:1}],{duration:1000})
@@ -421,12 +426,3 @@ chatbotResponse(userMessageText);
 }
     
 });
-
-
-
-
-
-
-
-
-
